@@ -15,6 +15,10 @@ class Counter extends React.Component {
     // this.handleClick = this.handleClick.bind(this);
   }
 
+  componentDidUpdate(prevProps) {
+    console.log(`the component updated: `, prevProps);
+  }
+
   handleClick = () => {
     console.log(this);
 
