@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import FancyParagraph from "./FancyParagraph";
 
-const RandomNumbers = props => {
+const RandomNumbers = ({ title, subTitle }) => {
   /**
    * useState returns an array of two items: [curr state data, function to update state data]
    * we pass useState our starting data, which is an empty array
@@ -24,11 +24,15 @@ const RandomNumbers = props => {
      * all current randNumbs, with 1 more added to end
      * if you don't create a new array it won't update
      */
-    setRandNumbs([...randNumbs, rand]);
+
+    const randNumbsCopy = [...randNumbs, rand];
+    setRandNumbs(randNumbsCopy);
   };
 
   return (
     <div>
+      <h1>{title}</h1>
+      <h5>{subTitle}</h5>
       <button onClick={handleClick}>Generate Number</button>
       {/* Create array of FancyParagraph Items with num inside */}
       {randNumbs.map((num, idx) => {
