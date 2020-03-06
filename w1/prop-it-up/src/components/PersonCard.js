@@ -2,18 +2,18 @@ import React, { useState } from "react";
 
 const PersonCard = ({ firstName, lastName, age, hairColor, hobbies }) => {
   const [ageState, setAgeState] = useState(age);
-  const [allAges, setAllAges] = useState([age]);
+  const [allNewAges, setAllNewAges] = useState([]);
 
   const handleBirthdayClick = event => {
     const newAge = ageState + 1;
 
     setAgeState(newAge);
     console.log(ageState);
-    setAllAges([...allAges, newAge]);
+    setAllNewAges([...allNewAges, newAge]);
   };
 
-  const renderAllAges = () => {
-    return allAges.map((ageVal, idx) => <span key={idx}>{ageVal} </span>);
+  const renderAllNewAges = () => {
+    return allNewAges.map((ageVal, idx) => <span key={idx}>{ageVal} </span>);
   };
 
   // create array of list items for each hobby
@@ -41,8 +41,8 @@ const PersonCard = ({ firstName, lastName, age, hairColor, hobbies }) => {
       </button>
 
       <div>
-        <p>All Ages:</p>
-        {renderAllAges()}
+        <p>All New Ages:</p>
+        {renderAllNewAges()}
       </div>
       <div>
         <p>Hobbies:</p>
