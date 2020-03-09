@@ -1,0 +1,13 @@
+.container-flex {
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.line-through {
+  text-decoration: line-through;
+}
+
+.red {
+  color: red;
+}
