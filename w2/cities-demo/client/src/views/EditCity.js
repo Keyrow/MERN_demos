@@ -8,6 +8,10 @@ const EditCity = ({ id }) => {
   const [population, setPopulation] = useState("");
   const [imgUrl, setImgUrl] = useState("");
 
+  // method 2, all errors at top
+  // see NewCity for method 1
+  const [errors, setErrors] = useState([]);
+
   useEffect(() => {
     axios
       .get("http://localhost:8000/api/cities/" + id)
@@ -34,12 +38,28 @@ const EditCity = ({ id }) => {
     axios
       .put("http://localhost:8000/api/cities/" + id, editedCity)
       .then(res => navigate("/cities/" + id))
-      .catch(console.log);
+      .catch(err => {
+        // extract error messages out of the errors object and put them into an array
+        const errorsObj = err.response.data.errors;
+        const errorMessages = [];
+
+        for (const key in errorsObj) {
+          errorMessages.push(errorsObj[key].message);
+        }
+
+        setErrors(errorMessages);
+      });
   };
 
   return (
     <div>
       <h2>Edit City</h2>
+
+      <div>
+        {errors.map(msg => (
+          <p className="error">{msg}</p>
+        ))}
+      </div>
       <form onSubmit={handleSubmit}>
         <div>
           <label>Name: </label>

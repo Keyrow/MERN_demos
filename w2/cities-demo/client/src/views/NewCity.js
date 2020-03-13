@@ -8,6 +8,10 @@ const NewCity = () => {
   const [population, setPopulation] = useState("");
   const [imgUrl, setImgUrl] = useState("");
 
+  // method 1, errors next to inputs
+  // see EditCity for method 2
+  const [errors, setErrors] = useState({});
+
   const handleSubmit = event => {
     event.preventDefault();
 
@@ -27,7 +31,10 @@ const NewCity = () => {
 
         navigate("/cities");
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err.response);
+        setErrors(err.response.data.errors);
+      });
   };
 
   return (
@@ -37,6 +44,11 @@ const NewCity = () => {
         <div>
           <label>Name: </label>
           <input onChange={event => setName(event.target.value)} type="text" />
+          {errors.name !== undefined ? (
+            <span className="error">{errors.name.message}</span>
+          ) : (
+            ""
+          )}
         </div>
 
         <div>
@@ -45,6 +57,11 @@ const NewCity = () => {
             onChange={event => setPopulation(event.target.value)}
             type="number"
           />
+          {errors.population !== undefined ? (
+            <span className="error">{errors.population.message}</span>
+          ) : (
+            ""
+          )}
         </div>
 
         <div>
@@ -53,6 +70,11 @@ const NewCity = () => {
             onChange={event => setImgUrl(event.target.value)}
             type="text"
           />
+          {errors.imgUrl !== undefined ? (
+            <span className="error">{errors.imgUrl.message}</span>
+          ) : (
+            ""
+          )}
         </div>
 
         <button>Submit</button>

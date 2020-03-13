@@ -5,7 +5,7 @@ module.exports = {
   create(req, res) {
     City.create(req.body)
       .then(city => res.json(city))
-      .catch(err => res.json(err));
+      .catch(err => res.status(400).json(err));
   },
   getAll(req, res) {
     City.find()
@@ -28,6 +28,6 @@ module.exports = {
       new: true
     })
       .then(updatedCity => res.json(updatedCity))
-      .catch(err => res.json(err));
+      .catch(err => res.status(400).json(err));
   }
 };

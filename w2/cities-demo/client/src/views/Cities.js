@@ -10,7 +10,7 @@ const Cities = () => {
     axios
       .get("http://localhost:8000/api/cities")
       .then(res => {
-        console.log(res);
+        // console.log(res);
         setCities(res.data);
       })
       .catch(console.log);
