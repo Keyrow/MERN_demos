@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 
+import { Link, navigate } from "@reach/router";
 import axios from "axios";
 
 const Cities = () => {
@@ -15,22 +16,45 @@ const Cities = () => {
       .catch(console.log);
   }, []);
 
+  const handleDelete = deleteId => {
+    axios
+      .delete("http://localhost:8000/api/cities/" + deleteId)
+      .then(res => {
+        const filteredCities = cities.filter(city => city._id !== deleteId);
+
+        setCities(filteredCities);
+      })
+      .catch(console.log);
+  };
+
   return (
-    <div>
-      <h2>All Cities</h2>
-      {cities.map((city, idx) => (
-        <div key={idx}>
-          <h3>{city.name}</h3>
-          <p>Population: {city.population}</p>
-          <img
-            style={{ paddingBottom: 20, borderBottom: "2px solid gray" }}
-            width="70%"
-            src={city.imgUrl}
-            alt={`${city.name} city`}
-          />
-        </div>
-      ))}
-    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {cities.map(city => {
+          return (
+            <tr key={city._id}>
+              <td>
+                <Link to={"/cities/" + city._id}>{city.name}</Link>
+              </td>
+              <td>
+                <button onClick={event => navigate(`/cities/${city._id}/edit`)}>
+                  Edit
+                </button>{" "}
+                <button onClick={event => handleDelete(city._id)}>
+                  Delete
+                </button>
+              </td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
   );
 };
 
