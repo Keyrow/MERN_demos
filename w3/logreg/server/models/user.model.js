@@ -3,12 +3,7 @@ const bcrypt = require("bcrypt");
 
 const UserSchema = new mongoose.Schema(
   {
-    firstName: {
-      type: String,
-      required: [true, "{PATH} is required."],
-      minlength: [2, "{PATH} must be at least {MINLENGTH} characters"]
-    },
-    lastName: {
+    username: {
       type: String,
       required: [true, "{PATH} is required."],
       minlength: [2, "{PATH} must be at least {MINLENGTH} characters"]
@@ -16,8 +11,10 @@ const UserSchema = new mongoose.Schema(
     email: {
       type: String,
       required: [true, "{PATH} is required."],
-      validator: val => /^([\w-\.]+@([\w-]+\.)+[\w-]+)?$/.test(val),
-      message: "Please enter a valid email"
+      validate: {
+        validator: val => /^([\w-\.]+@([\w-]+\.)+[\w-]+)?$/.test(val),
+        message: "Please enter a valid email"
+      }
     },
     password: {
       type: String,

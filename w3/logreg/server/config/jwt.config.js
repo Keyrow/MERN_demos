@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 
+// middleware function that rests between the request and response
 module.exports = {
   authenticate(req, res, next) {
     jwt.verify(
