@@ -58,6 +58,10 @@ class BST {
       }
     }
   }
+
+  contains(searchVal) {
+    // code here, return boolean
+  }
 }
 
 const myBST = new BST();
