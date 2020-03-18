@@ -16,7 +16,7 @@ module.exports = {
 
   create(req, res) {
     Post.create(req.body)
-      .then(post => res.json(post))
+      .then(newPost => res.json(newPost))
       .catch(err => res.status(400).json(err));
   },
 

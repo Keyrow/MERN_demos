@@ -2,6 +2,18 @@ body {
   font-size: 30px;
 }
 
-.container {
+.container, .container-flex {
   padding: 3rem;
+}
+
+.container-flex {
+  display: flex;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.text-center {
+  text-align: center;
 }
