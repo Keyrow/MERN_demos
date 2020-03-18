@@ -60,7 +60,45 @@ class BST {
   }
 
   contains(searchVal) {
-    // code here, return boolean
+    let current = this.root;
+
+    while (current) {
+      if (current.val === searchVal) {
+        return true;
+      }
+
+      if (searchVal < current.val) {
+        current = current.left;
+      } else {
+        current = current.right;
+      }
+    }
+    return false;
+  }
+
+  containsRecursive(searchVal, current = this.root) {
+    if (current === null) {
+      return false;
+    }
+
+    if (current.val === searchVal) {
+      return true;
+    }
+
+    if (searchVal < current.val) {
+      return this.containsRecursive(searchVal, current.left);
+    }
+
+    if (searchVal > current.val) {
+      return this.containsRecursive(searchVal, current.right);
+    }
+  }
+
+  size(node) {
+    if (!node) {
+      return 0;
+    }
+    return 1 + this.size(node.left) + this.size(node.right);
   }
 }
 
