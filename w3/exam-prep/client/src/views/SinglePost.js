@@ -43,6 +43,8 @@ const SinglePost = ({ id }) => {
   return (
     <div className="text-center">
       <h2>Title: {post.title}</h2>
+      <p>Primary Category: {post.primaryCategory}</p>
+      <p>Secondary Category: {post.secondaryCategory}</p>
       <span onClick={event => handleVote(true)} className="arrow">
         {post.likeCount}&uarr;{" "}
       </span>

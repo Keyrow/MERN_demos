@@ -21,6 +21,15 @@ const PostSchema = new mongoose.Schema(
     dislikeCount: {
       type: Number,
       default: 0
+    },
+    primaryCategory: {
+      type: String,
+      required: [true, `{PATH} is required.`],
+      minlength: [2, "{PATH} must be at least {MINLENGTH} characters"]
+    },
+    secondaryCategory: {
+      type: String,
+      minlength: [2, "{PATH} must be at least {MINLENGTH} characters"]
     }
     // adminPw: {
     //   type: String,

@@ -6,6 +6,7 @@ import { Link } from "@reach/router";
 const Posts = props => {
   const [posts, setPosts] = useState([]);
   const [randomPost, setRandomPost] = useState({});
+  const [searchCategory, setSearchCategory] = useState("");
 
   useEffect(() => {
     axios
@@ -32,28 +33,51 @@ const Posts = props => {
 
   return (
     <>
+      <div>
+        <label>DO A SEARCH </label>
+        <input
+          onChange={event => setSearchCategory(event.target.value)}
+          type="text"
+        />
+      </div>
+      <hr />
       <table>
         <thead>
           <tr>
             <th>Title</th>
             <th>Description</th>
             <th>Actions</th>
+            <th>Primary Category</th>
+            <th>Secondary Category</th>
           </tr>
         </thead>
         <tbody>
-          {posts.map((post, idx) => (
-            <tr key={idx}>
-              <td>{post.title}</td>
-              <td>{post.description}</td>
-              <td>
-                <Link to={"/posts/" + post._id}>Details</Link> |{" "}
-                <Link to={"/posts/" + post._id + "/edit"}>Edit</Link> |{" "}
-                <button onClick={event => handleDelete(post._id)}>
-                  Delete
-                </button>
-              </td>
-            </tr>
-          ))}
+          {posts
+            .filter(post => {
+              if (searchCategory === "") {
+                return true;
+              } else {
+                return (
+                  post.primaryCategory.includes(searchCategory) ||
+                  post.secondaryCategory.includes(searchCategory)
+                );
+              }
+            })
+            .map((post, idx) => (
+              <tr key={idx}>
+                <td>{post.title}</td>
+                <td>{post.description}</td>
+                <td>{post.primaryCategory}</td>
+                <td>{post.secondaryCategory}</td>
+                <td>
+                  <Link to={"/posts/" + post._id}>Details</Link> |{" "}
+                  <Link to={"/posts/" + post._id + "/edit"}>Edit</Link> |{" "}
+                  <button onClick={event => handleDelete(post._id)}>
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
 

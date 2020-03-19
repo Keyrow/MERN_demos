@@ -8,6 +8,8 @@ const CreatePost = props => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [imgUrl, setImgUrl] = useState("");
+  const [primaryCategory, setPrimaryCategory] = useState("");
+  const [secondaryCategory, setSecondaryCategory] = useState("");
   const [errors, setErrors] = useState({});
 
   const handleSubmit = event => {
@@ -18,7 +20,9 @@ const CreatePost = props => {
       title: title,
       // shorthand because key name and value stored in matching var name
       description,
-      imgUrl
+      imgUrl,
+      primaryCategory,
+      secondaryCategory
     };
 
     axios
@@ -44,6 +48,7 @@ const CreatePost = props => {
             ""
           )}
         </div>
+
         <div>
           <label>Description: </label>
           <textarea
@@ -56,6 +61,7 @@ const CreatePost = props => {
             ""
           )}
         </div>
+
         <div>
           <label>ImgUrl: </label>
           <input
@@ -68,6 +74,33 @@ const CreatePost = props => {
             ""
           )}
         </div>
+
+        <div>
+          <label>Primary Category: </label>
+          <input
+            onChange={event => setPrimaryCategory(event.target.value)}
+            type="text"
+          />
+          {errors.primaryCategory ? (
+            <span className="error">{errors.primaryCategory.message}</span>
+          ) : (
+            ""
+          )}
+        </div>
+
+        <div>
+          <label>Secondary Category: </label>
+          <input
+            onChange={event => setSecondaryCategory(event.target.value)}
+            type="text"
+          />
+          {errors.secondaryCategory ? (
+            <span className="error">{errors.secondaryCategory.message}</span>
+          ) : (
+            ""
+          )}
+        </div>
+
         <button>Submit</button>
       </form>
     </div>
