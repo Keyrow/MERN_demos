@@ -8,6 +8,7 @@ const CreatePost = props => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [imgUrl, setImgUrl] = useState("");
+  const [errors, setErrors] = useState({});
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -22,8 +23,12 @@ const CreatePost = props => {
 
     axios
       .post("http://localhost:8000/api/posts", newPost)
-      .then(res => navigate("/posts/" + res.data._id))
-      .catch(console.log);
+      .then(res => {
+        navigate("/posts/" + res.data._id);
+      })
+      .catch(err => {
+        setErrors(err.response.data.errors);
+      });
   };
 
   return (
@@ -33,6 +38,11 @@ const CreatePost = props => {
         <div>
           <label>Title: </label>
           <input onChange={event => setTitle(event.target.value)} type="text" />
+          {errors.title ? (
+            <span className="error">{errors.title.message}</span>
+          ) : (
+            ""
+          )}
         </div>
         <div>
           <label>Description: </label>
@@ -40,6 +50,11 @@ const CreatePost = props => {
             onChange={event => setDescription(event.target.value)}
             type="text"
           ></textarea>
+          {errors.description ? (
+            <span className="error">{errors.description.message}</span>
+          ) : (
+            ""
+          )}
         </div>
         <div>
           <label>ImgUrl: </label>
@@ -47,6 +62,11 @@ const CreatePost = props => {
             onChange={event => setImgUrl(event.target.value)}
             type="text"
           />
+          {errors.imgUrl ? (
+            <span className="error">{errors.imgUrl.message}</span>
+          ) : (
+            ""
+          )}
         </div>
         <button>Submit</button>
       </form>
