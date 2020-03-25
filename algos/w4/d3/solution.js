@@ -47,10 +47,7 @@ function getMaxServings(recipe, available) {
     const availableAmnt = available[reqIngred];
     const reqAmnt = recipe[reqIngred];
 
-    if (
-      available.hasOwnProperty(reqIngred) === false ||
-      availableAmnt < reqAmnt
-    ) {
+    if (!available.hasOwnProperty(reqIngred) || availableAmnt < reqAmnt) {
       // missing ingredient, can't make any
       return 0;
     }
