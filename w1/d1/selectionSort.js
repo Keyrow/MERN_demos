@@ -11,3 +11,26 @@
   Selection sort is one of the slower sorts.
   - ideal for: pagination, where page 1 displays 10 records for example, you run selection sort for 10 iterations only to display the first 10 sorted items
 */
+
+function selectionSort(nums) {
+  const len = nums.length;
+  let selectedIdx = 0;
+  let idxOfMin = 0;
+
+  while (selectedIdx < len) {
+    for (let i = selectedIdx; i < len; i++) {
+      if (nums[i] < nums[idxOfMin]) {
+        idxOfMin = i;
+      }
+    }
+
+    if (nums[selectedIdx] !== nums[idxOfMin]) {
+      const temp = nums[selectedIdx];
+      nums[selectedIdx] = nums[idxOfMin];
+      nums[idxOfMin] = temp;
+    }
+    selectedIdx += 1;
+    idxOfMin = selectedIdx;
+  }
+  return nums;
+}

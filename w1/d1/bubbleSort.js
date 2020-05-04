@@ -12,3 +12,23 @@
 
   For every pair of adjacent indicies, swap them if the item on the left is larger than the item on the right until array is fully sorted
 */
+
+function bubbleSort(nums) {
+  let isSorted = false;
+
+  while (isSorted === false) {
+    isSorted = true;
+
+    for (let i = 0; i < nums.length - 1; i++) {
+      const j = i + 1;
+
+      if (nums[i] > nums[j]) {
+        isSorted = false;
+        const temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+      }
+    }
+  }
+  return nums;
+}
