@@ -44,3 +44,39 @@
 const arrRandom = [9, 2, 5, 6, 4, 3, 7, 10, 1, 8];
 const arrOrdered = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const arrReversed = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
+
+function insertionSortSwap(arr) {
+  for (let i = 1; i < arr.length; i++) {
+    let targetIdx = i; // to avoid altering i directly
+    let leftIdx = targetIdx - 1; // compare to the left
+
+    while (leftIdx >= 0 && arr[leftIdx] > arr[targetIdx]) {
+      // destructure swap notation
+      [arr[leftIdx], arr[targetIdx]] = [arr[targetIdx], arr[leftIdx]];
+
+      // target swapped with comparison so target's new location is comparison's location
+      targetIdx = leftIdx;
+      leftIdx = targetIdx - 1;
+    }
+  }
+  return arr;
+}
+
+function insertionSortShift(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    // save the current 'target' so this space is available to use for shifting
+    let numToInsert = arr[i];
+    let leftIdx = i - 1;
+
+    while (leftIdx >= 0 && arr[leftIdx] > numToInsert) {
+      // shift to the right because it's greater than the item we are going to insert
+      arr[leftIdx + 1] = arr[leftIdx];
+      leftIdx--;
+    }
+    // shifting complete, insert position located
+    arr[leftIdx + 1] = numToInsert;
+  }
+  return arr;
+}
+
+console.log(insertionSortShift(arrReversed.slice()).join(", "));
