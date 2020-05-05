@@ -79,4 +79,4 @@ function insertionSortSwap(arr) {
   return arr;
 }
 
-console.log(insertionSortShift(arrReversed.slice()).join(", "));
+console.log(insertionSortShift(arrRandom.slice()).join(", "));
