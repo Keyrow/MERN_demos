@@ -8,14 +8,14 @@
   - visualization with playing cards (scroll down): https://www.khanacademy.org/computing/computer-science/algorithms/insertion-sort/a/insertion-sort
   - array / bar visualization: https://www.hackerearth.com/practice/algorithms/sorting/insertion-sort/visualize/
 
-  - see other visualizion linked in README
+  - see other visualizion linked in sorts.md
 
 
   - efficient for small data sets
   - constant memory / space O(1)
 
   Time Complexity
-    - Best: n when array is already sorted
+    - Best: O(n) when array is already sorted
     - Average: O(n^2)
     - Worst: O(n^2) when the array is reverse sorted
 
