@@ -49,17 +49,6 @@
       - split the array in half and recursively merge the halves using the previously created merge function
       - splitting of arrays stops when array can no longer be split
       - an array of 1 item is by definition sorted, so two arrays of 1 item can therefore be merged into a sorted array
-
-  useful methods
-
-  - arr.concat(array2, array3, ..., arrayX)
-    - combines array arg(s) with the array that concat is called on
-    - returns new arr w/o mutating originals
-
-  - arr.slice([begin[, end]])
-    - returns a copy of the specified portion of the array
-    - end is exclusive
-      - if omitted, slices from provided 'begin' to end of array
 */
 
 // sorts two already separately sorted arrays
