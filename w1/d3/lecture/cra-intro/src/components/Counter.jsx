@@ -1,5 +1,4 @@
 import React from "react";
-import { findByRole } from "@testing-library/react";
 
 class Counter extends React.Component {
   constructor(props) {
