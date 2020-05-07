@@ -19,17 +19,20 @@
   3. return: new idx of the pivot value
 */
 
+// src=https://itnext.io/a-sort-of-quick-guide-to-quicksort-and-hoares-partitioning-scheme-in-javascript-7792112c6d1
 // Hoare’s partitioning scheme, named for Sir Charles Antony Richard Hoare, who developed the quicksort algorithm.
-// does fewer swaps than many other techniques
+// does fewer swaps than Lomuto
+// NOTE that in this scheme, the pivot’s final location is not necessarily at the index that was returned (some edge cases)
 
-//    [11, 8, 14, 3, 6, 2, 7] => middle is chosen as pivot, 3
+//    [11, 8, 14, 3, 6, 2, 7] => middle is chosen as pivot: 3
 // => [2, 8, 14, 3, 6, 11, 7] 11 & 2 swapped
 // => [2, 3, 14, 8, 6, 11, 7] 3 & 8 swapped
 function partitionHoare(arr, left = 0, right = arr.length - 1) {
   const pivot = arr[Math.floor((left + right) / 2)];
+  // console.log("pivot: ", pivot);
 
-  while (left < right) {
-    while (arr[left] < pivot && left <= right) {
+  while (left <= right) {
+    while (arr[left] < pivot) {
       left++;
     }
 
@@ -37,46 +40,13 @@ function partitionHoare(arr, left = 0, right = arr.length - 1) {
       right--;
     }
 
-    if (left < right) {
+    if (left <= right) {
       // swap left and right because we found something left of pivot that is larger
       // and something right of pivot that is small, so they need to swap
       [arr[left], arr[right]] = [arr[right], arr[left]];
-
-      if (arr[left] !== pivot) {
-        left++;
-      }
-
-      if (arr[right] !== pivot) {
-        right--;
-      }
+      left++;
+      right--;
     }
   }
   return left;
 }
-
-// Lomuto partition scheme, it is less efficient than the Hoare partition scheme
-//    [11, 8, 14, 3, 6, 2, 7] => 7 is chosen as pivot
-// => [3, 8, 14, 11, 6, 2, 7] 11 & 3 swapped
-// => [3, 6, 14, 11, 8, 2, 7] 8 & 6 swapped
-// => [3, 6, 2, 11, 8, 14, 7] 2 & 14 swapped
-// => [3, 6, 2, 7, 8, 14, 11] 7 & 11 swapped
-function partitionLomuto(nums, low, high) {
-  const pivot = nums[high];
-  let i = low;
-
-  for (let j = low; j < high; j++) {
-    if (nums[j] <= pivot) {
-      // swap nums at i and j
-      [nums[i], nums[j]] = [nums[j], nums[i]];
-      i++;
-    }
-  }
-  // final swap
-  [nums[i], nums[high]] = [nums[high], nums[i]];
-  return i;
-}
-
-const a = [11, 8, 14, 3, 6, 2, 7];
-const b = [1, 17, 12, 3, 9, 13, 21, 4, 27];
-partitionHoare(b);
-console.log(b.join(", "));
