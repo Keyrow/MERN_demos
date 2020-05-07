@@ -22,13 +22,13 @@
 // Hoare’s partitioning scheme, named for Sir Charles Antony Richard Hoare, who developed the quicksort algorithm.
 // does fewer swaps than many other techniques
 
-//    [11, 8, 14, 3, 6, 2, 7]
+//    [11, 8, 14, 3, 6, 2, 7] => middle is chosen as pivot, 3
 // => [2, 8, 14, 3, 6, 11, 7] 11 & 2 swapped
 // => [2, 3, 14, 8, 6, 11, 7] 3 & 8 swapped
-function partitionHoare(arr, left, right) {
+function partitionHoare(arr, left = 0, right = arr.length - 1) {
   const pivot = arr[Math.floor((left + right) / 2)];
 
-  while (left <= right) {
+  while (left < right) {
     while (arr[left] < pivot && left <= right) {
       left++;
     }
@@ -37,19 +37,25 @@ function partitionHoare(arr, left, right) {
       right--;
     }
 
-    if (left <= right) {
+    if (left < right) {
       // swap left and right because we found something left of pivot that is larger
       // and something right of pivot that is small, so they need to swap
       [arr[left], arr[right]] = [arr[right], arr[left]];
-      left++;
-      right--;
+
+      if (arr[left] !== pivot) {
+        left++;
+      }
+
+      if (arr[right] !== pivot) {
+        right--;
+      }
     }
   }
   return left;
 }
 
 // Lomuto partition scheme, it is less efficient than the Hoare partition scheme
-//    [11, 8, 14, 3, 6, 2, 7]
+//    [11, 8, 14, 3, 6, 2, 7] => 7 is chosen as pivot
 // => [3, 8, 14, 11, 6, 2, 7] 11 & 3 swapped
 // => [3, 6, 14, 11, 8, 2, 7] 8 & 6 swapped
 // => [3, 6, 2, 11, 8, 14, 7] 2 & 14 swapped
@@ -71,3 +77,6 @@ function partitionLomuto(nums, low, high) {
 }
 
 const a = [11, 8, 14, 3, 6, 2, 7];
+const b = [1, 17, 12, 3, 9, 13, 21, 4, 27];
+partitionHoare(b);
+console.log(b.join(", "));
