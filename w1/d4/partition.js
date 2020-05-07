@@ -25,7 +25,6 @@
 //    [11, 8, 14, 3, 6, 2, 7]
 // => [2, 8, 14, 3, 6, 11, 7] 11 & 2 swapped
 // => [2, 3, 14, 8, 6, 11, 7] 3 & 8 swapped
-
 function partitionHoare(arr, left, right) {
   const pivot = arr[Math.floor((left + right) / 2)];
 
@@ -33,10 +32,14 @@ function partitionHoare(arr, left, right) {
     while (arr[left] < pivot && left <= right) {
       left++;
     }
+
     while (arr[right] > pivot) {
       right--;
     }
+
     if (left <= right) {
+      // swap left and right because we found something left of pivot that is larger
+      // and something right of pivot that is small, so they need to swap
       [arr[left], arr[right]] = [arr[right], arr[left]];
       left++;
       right--;
@@ -44,9 +47,6 @@ function partitionHoare(arr, left, right) {
   }
   return left;
 }
-// destructure syntax ex: arr = [1, 2, 3]
-// let [first, second] = [arr[0], arr[1]];
-// first & second are now variables equal to first and second items of arr respectively
 
 // Lomuto partition scheme, it is less efficient than the Hoare partition scheme
 //    [11, 8, 14, 3, 6, 2, 7]
@@ -54,7 +54,6 @@ function partitionHoare(arr, left, right) {
 // => [3, 6, 14, 11, 8, 2, 7] 8 & 6 swapped
 // => [3, 6, 2, 11, 8, 14, 7] 2 & 14 swapped
 // => [3, 6, 2, 7, 8, 14, 11] 7 & 11 swapped
-
 function partitionLomuto(nums, low, high) {
   const pivot = nums[high];
   let i = low;
