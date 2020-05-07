@@ -36,6 +36,10 @@ class Counter extends React.Component {
     return listItems;
   }
 
+  componentDidUpdate(prevProps) {
+    console.log("the component updated", prevProps);
+  }
+
   render() {
     return (
       // empty angle brackets is a JSX fragment, this or some kind of other container is needed, like a div when there are multiple children
