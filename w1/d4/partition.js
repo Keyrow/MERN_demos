@@ -51,4 +51,8 @@ function partitionHoare(arr, left = 0, right = arr.length - 1) {
   return left;
 }
 
+// const b = [1, 17, 12, 3, 9, 13, 21, 4, 27];
+// console.log(partitionHoare(b));
+// console.log(b.join(", "));
+
 module.exports = partitionHoare;

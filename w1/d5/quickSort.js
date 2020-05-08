@@ -19,3 +19,22 @@
 */
 
 const partitionHoare = require("../d4/partition");
+
+function quickSort(arr, left = 0, right = arr.length - 1) {
+  // base case to stop recursion
+  if (left >= right) {
+    return;
+  }
+
+  const partitionIdx = partitionHoare(arr, left, right);
+
+  quickSort(arr, left, partitionIdx - 1); // left of pivot
+  quickSort(arr, partitionIdx, right); // right of pivot
+
+  return arr;
+}
+
+const a = [11, 8, 14, 3, 6, 2, 7];
+const b = [1, 17, 12, 3, 9, 13, 21, 4, 27];
+console.log(b.join(", "));
+console.log(quickSort(b).join(", "));
