@@ -50,3 +50,5 @@ function partitionHoare(arr, left = 0, right = arr.length - 1) {
   }
   return left;
 }
+
+export default partitionHoare;
