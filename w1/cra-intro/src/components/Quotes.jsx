@@ -5,11 +5,11 @@ import SingleQuote from "./SingleQuote";
 const Quotes = (props) => {
   // set the starting value of our quotes array to have these 3 quotes, this can change later, because the state of something can change
   // useState returns an array where the first item is the current state value and the 2nd item is a function used to update the state value
-  const [quotes, setQuotes] = useState([
-    "Born too early to explore the galaxy. Born too late to explore the earth. Born just in time to browse dank memes.",
-    "I'll study later.",
-    "I'm leaving the house right now. I'll be there soon.",
-  ]);
+  const [quotes, setQuotes] = useState([]);
+
+  // state for each input box of the form, since the value of the input boxes can change
+  const [submittedBy, setSubmittedBy] = useState("");
+  const [submittedQuote, setSubmittedQuote] = useState("");
 
   const handleDelete = (event, delIdx) => {
     const filteredQuotes = quotes.filter((quote, i) => {
@@ -22,22 +22,107 @@ const Quotes = (props) => {
     setQuotes(filteredQuotes);
   };
 
+  const handleSubmit = (event) => {
+    // prevent the default page refresh behavior of form
+    event.preventDefault();
+
+    const newQuote = {
+      submittedBy: submittedBy,
+      // shorthand if key is named same as the var that has the value
+      submittedQuote,
+      isSelected: false,
+    };
+
+    // update with a NEW array that has the old quotes
+    // plus the newQuote as the last item
+    setQuotes([...quotes, newQuote]);
+
+    // reset input box values
+    setSubmittedBy("");
+    setSubmittedQuote("");
+  };
+
+  const selectQuote = (selectedIdx) => {
+    // without .map
+    // const quotesCopy = [...quotes];
+    // for (let i = 0; i < quotesCopy.length; ++i) {
+    //   if (i === selectedIdx) {
+    //     quotesCopy[i].isSelected = true;
+    //   } else {
+    //     quotesCopy[i].isSelected = false;
+    //   }
+    // }
+
+    const updatedQuotes = quotes.map((quote, i) => {
+      if (i === selectedIdx) {
+        quote.isSelected = true;
+      } else {
+        quote.isSelected = false;
+      }
+
+      return quote;
+    });
+
+    setQuotes(updatedQuotes);
+  };
+
   return (
     <div>
-      {quotes.map((quoteStr, idx) => {
-        return (
-          <p key={idx}>
-            <button
+      {/* <p>current state of submittedBy: {submittedBy}</p>
+      <p>current state of submittedQuote: {submittedQuote}</p> */}
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>Submitted By: </label>
+          <input
+            onChange={(event) => {
+              setSubmittedBy(event.target.value);
+            }}
+            type="text"
+            value={submittedBy}
+          />
+        </div>
+
+        <div>
+          <label>Quote: </label>
+          <input
+            onChange={(event) => {
+              setSubmittedQuote(event.target.value);
+            }}
+            type="text"
+            value={submittedQuote}
+          />
+        </div>
+        <button>Add Quote</button>
+      </form>
+      <div>
+        {quotes.map((quoteObj, idx) => {
+          let classes = "";
+
+          if (quoteObj.isSelected) {
+            classes += "selected-quote ";
+          }
+
+          return (
+            <div
+              className={classes}
+              key={idx}
               onClick={(event) => {
-                handleDelete(event, idx);
+                selectQuote(idx);
               }}
             >
-              Delete
-            </button>{" "}
-            <SingleQuote>{quoteStr}</SingleQuote>
-          </p>
-        );
-      })}
+              <hr />
+              <button
+                onClick={(event) => {
+                  handleDelete(event, idx);
+                }}
+              >
+                Delete
+              </button>{" "}
+              <SingleQuote quote={quoteObj}></SingleQuote>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };
