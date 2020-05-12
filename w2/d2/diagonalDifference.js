@@ -16,3 +16,22 @@
   right to left diagonal: 3 + 5 + 9 = 17
   absolute difference = 2
 */
+
+function diagonalDifference(matrix) {
+  let ltrSum = 0,
+    rtlSum = 0;
+
+  for (let i = 0; i < matrix.length; i++) {
+    const row = matrix[i];
+    ltrSum += row[i];
+    rtlSum += row[row.length - i - 1];
+  }
+  return Math.abs(ltrSum - rtlSum);
+}
+
+function diagonalDifference2(matrix) {
+  let diff = 0;
+
+  matrix.forEach((row, i) => (diff += row[i] - row[row.length - i - 1]));
+  return Math.abs(diff);
+}
