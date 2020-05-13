@@ -43,27 +43,28 @@ function deltaOfTwoSets(setA, setB) {
 
 // O(n)
 function deltaOfTwoSetsHashTable(setA, setB) {
-  const uniquesA = {};
-  const uniquesB = {};
+  const seenA = {};
+  const seenB = {};
   const disjunctiveUnion = [];
 
   for (const num of setA) {
-    uniquesA[num] = num;
+    // adding the num as the value avoids having to convert the string key back to int
+    seenA[num] = num;
   }
 
   for (const num of setB) {
-    uniquesB[num] = num;
+    seenB[num] = num;
   }
 
-  for (const key in uniquesA) {
-    if (uniquesB.hasOwnProperty(key) === false) {
-      disjunctiveUnion.push(uniquesA[key]);
+  for (const key in seenA) {
+    if (seenB.hasOwnProperty(key) === false) {
+      disjunctiveUnion.push(seenA[key]);
     }
   }
 
-  for (const key in uniquesB) {
-    if (uniquesA.hasOwnProperty(key) === false) {
-      disjunctiveUnion.push(uniquesB[key]);
+  for (const key in seenB) {
+    if (seenA.hasOwnProperty(key) === false) {
+      disjunctiveUnion.push(seenB[key]);
     }
   }
 
