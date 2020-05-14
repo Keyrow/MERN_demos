@@ -22,3 +22,31 @@
   ]
 
 */
+
+function findConsqSums(arr, desiredSum) {
+  const sums = [];
+
+  for (let i = 0; i < arr.length; ++i) {
+    const consecNums = [];
+    let sum = 0;
+    let j = i;
+
+    while (sum <= desiredSum && j < arr.length - 1) {
+      if (sum + arr[j] <= desiredSum) {
+        sum += arr[j];
+        consecNums.push(arr[j++]);
+
+        if (sum === desiredSum) {
+          // without slice, future additions to consecNums
+          // will be added to the already pushed consecNums via reference
+          sums.push(consecNums.slice());
+        }
+      } else {
+        break;
+      }
+    }
+  }
+  return sums;
+}
+
+console.log(findConsqSums([2, 5, 3, 6, 7, 0, 0, 23, 12], 16));
