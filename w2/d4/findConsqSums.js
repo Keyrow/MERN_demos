@@ -11,7 +11,7 @@
     [3,6,7]
   ]
 
-  bonus, what if there are zeros in the input
+  bonus, Interview added additional challenge: what if there are zeros in the input
 
   input: findConsqSums([2, 5, 3, 6, 7, 0, 0, 23, 12], 16)
   output: [
