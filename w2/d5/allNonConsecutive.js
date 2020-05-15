@@ -1,5 +1,3 @@
-// https://www.codewars.com/kata/58f8b35fda19c0c79400020f
-
 /* 
   Given an array of ints, find all the non-consecutive integers
   A number is non-consecutive if it is NOT exactly 1 larger than the previous element.
