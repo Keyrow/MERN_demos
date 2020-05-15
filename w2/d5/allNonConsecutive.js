@@ -14,3 +14,21 @@
     {i: 7, n:10}
   ]
 */
+
+// O(n) time
+function allNonConsecutive(nums) {
+  const output = [];
+
+  for (let i = 1; i < nums.length; ++i) {
+    const prevNum = nums[i - 1];
+    const currNum = nums[i];
+
+    if (prevNum + 1 !== currNum) {
+      output.push({
+        i: i,
+        n: currNum,
+      });
+    }
+  }
+  return output;
+}
