@@ -6,6 +6,7 @@ const cors = require("cors");
 require("./config/mongoose.config")(db_name);
 
 const app = express();
+app.use(cors());
 
 // req.body undefined without this!
 app.use(express.json());
