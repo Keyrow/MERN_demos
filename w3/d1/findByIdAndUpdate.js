@@ -51,7 +51,25 @@ const students = [
     lateCount: 16,
     redBeltStatus: false
   }
+  Explanation: In this implementation
+    randomKey was not added because it is not an existing key that can be updated
 
   Input: 5, {}, students
   Output: null
 */
+
+function findByIdAndUpdate(id, updatedVals, collection) {
+  for (const doc of collection) {
+    if (doc.id === id) {
+      for (const keyToUpdate in updatedVals) {
+        const newVal = updatedVals[keyToUpdate];
+
+        if (doc.hasOwnProperty(keyToUpdate)) {
+          doc[keyToUpdate] = newVal;
+        }
+      }
+      return doc;
+    }
+  }
+  return null;
+}
