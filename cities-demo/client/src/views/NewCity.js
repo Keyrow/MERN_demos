@@ -7,6 +7,7 @@ const NewCity = (props) => {
   const [name, setName] = useState("");
   const [population, setPopulation] = useState("");
   const [imgUrl, setImgUrl] = useState("");
+  const [errors, setErrors] = useState({});
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -25,7 +26,8 @@ const NewCity = (props) => {
         navigate("/cities");
       })
       .catch((err) => {
-        console.log(err);
+        setErrors(err.response.data.errors);
+        console.log(err.response.data.errors);
       });
   };
 
@@ -44,6 +46,13 @@ const NewCity = (props) => {
             setName(event.target.value);
           }}
         />
+        {errors.name ? (
+          <span style={{ color: "red", marginLeft: "5px" }}>
+            {errors.name.message}
+          </span>
+        ) : (
+          ""
+        )}
       </div>
 
       <div>
@@ -55,6 +64,13 @@ const NewCity = (props) => {
             setPopulation(event.target.value);
           }}
         />
+        {errors.population ? (
+          <span style={{ color: "red", marginLeft: "5px" }}>
+            {errors.population.message}
+          </span>
+        ) : (
+          ""
+        )}
       </div>
 
       <div>
@@ -66,6 +82,13 @@ const NewCity = (props) => {
             setImgUrl(event.target.value);
           }}
         />
+        {errors.imgUrl ? (
+          <span style={{ color: "red", marginLeft: "5px" }}>
+            {errors.imgUrl.message}
+          </span>
+        ) : (
+          ""
+        )}
       </div>
       <button>Submit</button>
     </form>
