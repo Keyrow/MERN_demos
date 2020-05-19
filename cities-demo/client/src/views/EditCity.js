@@ -12,7 +12,6 @@ const EditCity = (props) => {
     axios
       .get("http://localhost:8000/api/cities/" + props.id)
       .then((res) => {
-        // setCity(res.data);
         setName(res.data.name);
         setPopulation(res.data.population);
         setImgUrl(res.data.imgUrl);
