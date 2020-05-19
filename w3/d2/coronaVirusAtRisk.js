@@ -15,7 +15,7 @@
 
     A person is at high risk of catching the virus if they are:
     1. not practicing social distancing
-    2. have a friend who is not practicing social distancing whom is infected
+    2. have a friend who is not practicing social distancing who is infected
 
     Bonus: after solving it, make a 2nd solution to practice functional programming with built in methods
 */
@@ -42,7 +42,7 @@ const friend3 = {
 };
 
 // Input:
-const people = [
+const persons = [
   {
     firstName: "Person",
     lastName: "One",
