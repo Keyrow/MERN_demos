@@ -6,6 +6,8 @@ import { Link, Redirect, Router } from "@reach/router";
 import NotFound from "./views/NotFound";
 import NewCity from "./views/NewCity";
 import Cities from "./views/Cities";
+import City from "./views/City";
+import EditCity from "./views/EditCity";
 
 function App() {
   return (
@@ -16,7 +18,9 @@ function App() {
         <Redirect from="/" to="/cities" noThrow="true" />
         <NotFound default />
         <Cities path="/cities" />
+        <City path="/cities/:id" />
         <NewCity path="/cities/new" />
+        <EditCity path="/cities/:id/edit" />
       </Router>
     </div>
   );
