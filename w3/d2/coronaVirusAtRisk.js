@@ -63,3 +63,37 @@ const persons = [
   },
 ];
 // Output: ["Person One", "Person Three"]
+
+// // O(n * m) where n is length of persons and m is length of habits -> O(n^2) time, O(n) space
+function getAtRiskPeople(persons) {
+  const atRiskPersons = [];
+
+  for (const person of persons) {
+    if (person.isSocialDistancing === false) {
+      for (const friend of person.friends) {
+        if (friend.isSocialDistancing === false && friend.isInfected) {
+          atRiskPersons.push(`${person.firstName} ${person.lastName}`);
+          // don't need to check any other friends, already know this person
+          // is at risk, and if we find they are at risk again, they will be
+          // pushed again if we don't break
+          break;
+        }
+      }
+    }
+  }
+  return atRiskPersons;
+}
+
+function getAtRiskPeopleFunctional(persons) {
+  return persons
+    .filter(
+      (person) =>
+        person.isSocialDistancing === false &&
+        person.friends.findIndex(
+          (friend) => friend.isSocialDistancing === false && friend.isInfected
+        ) > -1
+    )
+    .map((person) => `${person.firstName} ${person.lastName}`);
+}
+
+console.log(getAtRiskPeopleFunctional(persons));

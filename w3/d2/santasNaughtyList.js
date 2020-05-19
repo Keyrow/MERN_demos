@@ -41,3 +41,44 @@ const students = [
 
 // Input: students, "vapes too much"
 // Output: []
+
+// O(n * m) where n is length of persons and m is length of habits -> O(n^2) time
+function getSantasNaughtyList(persons, badHabit) {
+  const coalRecipients = [];
+
+  for (let i = 0; i < persons.length; ++i) {
+    const person = persons[i];
+
+    for (let j = 0; j < person.habits.length; ++j) {
+      const personsHabit = person.habits[j];
+
+      if (personsHabit === badHabit) {
+        coalRecipients.push(`${person.firstName} ${person.lastName}`);
+        // found what we are looking for, no need to keep looping
+        break;
+      }
+    }
+  }
+  return coalRecipients;
+}
+
+function getSantasNaughtyListOfLoop(persons, badHabit) {
+  const coalRecipients = [];
+
+  for (const person of persons) {
+    for (const personsHabit of person.habits) {
+      if (personsHabit === badHabit) {
+        coalRecipients.push(`${person.firstName} ${person.lastName}`);
+        // found what we are looking for, no need to keep looping
+        break;
+      }
+    }
+  }
+  return coalRecipients;
+}
+
+function getSantasNaughtListFunctional(persons, badHabit) {
+  return persons
+    .filter((person) => person.habits.includes(badHabit))
+    .map((person) => `${person.firstName} ${person.lastName}`);
+}
