@@ -1,6 +1,6 @@
 /* 
 
-  Optional chaining is a newer syntax that also solves this problem: https://levelup.gitconnected.com/new-javascript-features-in-2019-optional-chaining-null-coalescing-a7fd38f4ef2d
+  Optional chaining is a newer syntax that can help with this problem : https://levelup.gitconnected.com/new-javascript-features-in-2019-optional-chaining-null-coalescing-a7fd38f4ef2d
 
   The more you deal with objects, especially ones with many nested objects, where you
   are chaining dot notation to access nested values, the more you run into these errors:
@@ -62,3 +62,76 @@ const keys4 = ["address", "city"];
 
 const keys5 = [];
 // Output: the provided obj
+
+function simpleLens(obj, keys) {
+  let val = obj;
+
+  for (const currKey of keys) {
+    if (val === undefined || val === null) {
+      return null;
+    }
+
+    // go deeper into object, like runner = runner.next
+    // except the key is not named "next" and the key is in a variable
+    val = val[currKey];
+  }
+
+  // when the loop ends we might still have undefined
+  // and our check in the loop won't catch it since loop ended
+  if (val === undefined) {
+    return null;
+  }
+  return val;
+}
+
+// Since reduce stops at the last key, if the last key's val is undefined, the logic inside reduce
+// won't catch it and return null, but undefined || null at the end will return null
+function lensReduce(obj, keys) {
+  return (
+    keys.reduce(
+      (val, key) => (val === undefined || val === null ? null : val[key]),
+      obj
+    ) || null
+  );
+}
+
+// recursive slns from Morley Tatro
+function simpleLensRecursive(obj, keys) {
+  if (!keys.length) {
+    return obj;
+  }
+  if (obj === undefined || obj === null) {
+    return null;
+  }
+  return simpleLens(obj[keys[0]], keys.slice(1));
+}
+
+function simpleLensRecursive2(obj, keys, i = 0) {
+  if (i === keys.length) {
+    return obj;
+  }
+  if (obj === undefined || obj === null) {
+    return null;
+  }
+  return simpleLens(obj[keys[i]], keys, i + 1);
+}
+
+/* 
+  This can be used to allow the path to be passed in as either an array of strings
+  or a string itself that uses dot and/or bracket notation
+*/
+function splitKeyPath(path) {
+  if (Array.isArray(path)) {
+    return path;
+  }
+
+  if (typeof path === "string") {
+    // regex to split into array based on brackets or period as separator / delimiter
+    // .filter(Boolean) will return any empty string elements that are sometimes
+    // present in the array .split returns
+    return path.split(/[\\\[\\\].]/).filter(Boolean);
+  }
+  // if the type isn't either string or array so loop ran on the return
+  // of this function won't break
+  return [];
+}
