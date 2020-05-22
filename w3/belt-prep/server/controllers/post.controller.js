@@ -15,6 +15,7 @@ module.exports = {
 
   getAll(req, res) {
     Post.find()
+      .sort({ title: 1 })
       .then((cities) => {
         res.json(cities);
       })
@@ -42,6 +43,27 @@ module.exports = {
     })
       .then((updatedPost) => {
         res.json(updatedPost);
+      })
+      .catch((err) => {
+        res.status(400).json(err);
+      });
+  },
+
+  // see comments in front end
+  // like functionality is re-using the update method in controller, dislike could do the same, but showing a different way
+  dislike(req, res) {
+    Post.findById(req.params.id)
+      .then((post) => {
+        post.dislikeCount++;
+
+        post
+          .save()
+          .then((updatedPost) => {
+            res.json(updatedPost);
+          })
+          .catch((err) => {
+            res.status(400).json(err);
+          });
       })
       .catch((err) => {
         res.status(400).json(err);
