@@ -25,3 +25,29 @@
     - the number 0 is falsy
     - NaN is falsy
 */
+
+// Time: O(n)
+// Space: O(1)
+function qMarks(str) {
+  let prevInt = 0;
+  let qMarkCnt = 0;
+
+  for (let i = 0; i < str.length; ++i) {
+    if (str[i] === "?") {
+      ++qMarkCnt;
+    } else {
+      const parsed = parseInt(str[i]);
+
+      // not not a number means it's a number
+      if (!isNaN(parsed)) {
+        if (qMarkCnt === 3 && prevInt + parsed === 10) {
+          return true;
+        } else {
+          prevInt = parsed;
+          qMarkCnt = 0;
+        }
+      }
+    }
+  }
+  return false;
+}
