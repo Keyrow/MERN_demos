@@ -34,10 +34,17 @@ const str6 = "abc";
   Unless it is odd length, then it can have 1 character that
   can have an odd number of occurrences.
 
+  Another way to look at it would be, if you cancel out ever char that has a pair,
+  it can be a palindrome if you are left with 0 or 1 char remaining:
+    - "dad" the "d" cancels with itself to leave "a"
+    - "daad" the "d" and "a" cancel with itself to leave nothing
+    - "daam" the "a" cancels with itself leaving "dm", more than 1 char remaining, can't be palindrome
 */
 
 // Time: O(n)
 // Space: O(n)
+// This same approach can be done with an array, using .indexOf instead of .hasOwnProperty and .splice instead of delete
+// but it's much slower that way because .indexOf and .splice would be a nested inside a loop
 function canStrBecomePalindrome(str) {
   if (str.length === 0) {
     return false;
