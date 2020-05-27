@@ -3,7 +3,10 @@ import axios from "axios";
 import { Link } from "@reach/router";
 
 const Posts = (props) => {
+  const [allPosts, setAllPosts] = useState([]);
   const [posts, setPosts] = useState([]);
+  const [searchBy, setSearchBy] = useState("title");
+  const [searchMethod, setSearchMethod] = useState("startsWith");
 
   useEffect(() => {
     fetchPosts();
@@ -14,6 +17,7 @@ const Posts = (props) => {
       .get("http://localhost:8000/api/posts")
       .then((res) => {
         console.log(res.data);
+        setAllPosts(res.data);
         setPosts(res.data);
       })
       .catch((err) => {
@@ -66,8 +70,55 @@ const Posts = (props) => {
       });
   };
 
+  const search = (event) => {
+    const searchFor = event.target.value;
+
+    const filteredPosts = allPosts.filter((post) => {
+      return post[searchBy]
+        .toLowerCase()
+        [searchMethod](searchFor.toLowerCase());
+    });
+
+    setPosts(filteredPosts);
+  };
+
   return (
     <div>
+      <div>
+        <label>Search By: </label>
+        <select
+          onChange={(event) => {
+            setSearchBy(event.target.value);
+          }}
+        >
+          <option defaultValue value="title">
+            Title
+          </option>
+          <option value="description">Description</option>
+          <option value="primaryCategory">Primary Category</option>
+          <option value="secondaryCategory">Secondary Category</option>
+        </select>{" "}
+        <label>Search Method: </label>
+        <select
+          onChange={(event) => {
+            setSearchMethod(event.target.value);
+          }}
+        >
+          <option defaultValue value="startsWith">
+            Starts With
+          </option>
+          <option value="endsWith">Ends With</option>
+          <option value="includes">Includes</option>
+        </select>{" "}
+        <label>Search For: </label>
+        <input
+          onChange={(event) => {
+            search(event);
+          }}
+          type="text"
+        />
+        <hr />
+      </div>
       {posts.map((post, idx) => {
         return (
           <div key={post._id}>
@@ -84,7 +135,7 @@ const Posts = (props) => {
             <p>
               Likes: {post.likeCount} | Dislikes: {post.dislikeCount}
             </p>
-            <img src={post.imgUrl} alt="post" width="40%" />
+            {/* <img src={post.imgUrl} alt="post" width="40%" /> */}
             <p>Posted On: {post.createdAt}</p>
             <Link to={`/posts/${post._id}/edit`}>Edit</Link>{" "}
             <button
