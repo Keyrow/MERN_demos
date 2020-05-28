@@ -37,3 +37,59 @@ const test5V2 = "1.001";
 const test6V1 = "1.0.1";
 const test6V2 = "1";
 // Output: 1
+
+// Time O(n + m + max(n, m)) -> O(n) linear, where n = v1.length, m = v2.length. Loop over each with the .split, then loop over the larger of the two with the for loop
+// Space: O(n + m) -> O(n)
+function compareVersions(v1, v2) {
+  const v1Split = v1.split(".");
+  const v2Split = v2.split(".");
+
+  for (let i = 0; i < v1Split.length || i < v2Split.length; i++) {
+    // || 0 means if whatever is to the left of || is falsy, use 0 as the value instead
+    const v1RevisionNum = parseInt(v1Split[i]) || 0;
+    const v2RevisionNum = parseInt(v2Split[i]) || 0;
+
+    if (v1RevisionNum > v2RevisionNum) {
+      return 1;
+    } else if (v1RevisionNum < v2RevisionNum) {
+      return -1;
+    }
+  }
+  return 0;
+}
+
+// Time: O(n) linear, despite nested loops because nested loop iterations are increasing the same index as outer loop is using
+// catches early exits right away instead of after running .split on both strings
+// Space: O(n), as v1 or v2 grow is size v1Revision or v2Revision could grow in size if there is a long revision number
+function compareVers(v1, v2) {
+  let v1Revision = "";
+  let v2Revision = "";
+  let idx1 = 0;
+  let idx2 = 0;
+
+  while (idx1 < v1.length || idx2 < v2.length) {
+    while (v1[idx1] !== "." && idx1 < v1.length) {
+      v1Revision += v1[idx1++];
+    }
+    while (v2[idx2] !== "." && idx2 < v2.length) {
+      v2Revision += v2[idx2++];
+    }
+
+    v1Revision = v1Revision === "" ? 0 : parseInt(v1Revision);
+    v2Revision = v2Revision === "" ? 0 : parseInt(v2Revision);
+
+    if (v1Revision > v2Revision) {
+      return 1;
+    } else if (v1Revision < v2Revision) {
+      return -1;
+    }
+
+    v1Revision = "";
+    v2Revision = "";
+    idx1++;
+    idx2++;
+  }
+  return 0;
+}
+
+console.log(compareVers("01", "1"));
