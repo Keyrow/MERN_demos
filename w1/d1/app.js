@@ -53,6 +53,10 @@ class Queue {
   dequeue() {
     return this.items.shift();
   }
+
+  len() {
+    return this.items.length;
+  }
 }
 
 class Address {
@@ -92,7 +96,7 @@ class CoffeeShop {
 
   takeOrders() {
     setInterval(() => {
-      if (this.orderLine.items.length > 0) {
+      if (this.orderLine.len() > 0) {
         this.orderPrompt(this.orderLine.dequeue());
       }
     }, 5000);
@@ -101,7 +105,7 @@ class CoffeeShop {
   printPendingOrders() {
     let str = "";
 
-    for (let i = 0; i < this.pendingOrders.items.length; ++i) {
+    for (let i = 0; i < this.pendingOrders.len(); ++i) {
       const order = this.pendingOrders.items[i];
 
       str += `${i}: ${order.customerName} - ${order.itemName}\n`;
