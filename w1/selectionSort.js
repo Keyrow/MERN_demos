@@ -1,5 +1,4 @@
 /*   
-  https://www.hackerearth.com/practice/algorithms/sorting/merge-sort/visualize/
   https://visualgo.net/en/sorting
 
   Selection sort works by iterating through the list, finding the minimum value, and moving it to the beginning of the list. Then, ignoring the first position, which is now sorted, iterate through the list again to find the next minimum value and move it to index 1. This continues until all values are sorted.
