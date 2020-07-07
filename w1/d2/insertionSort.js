@@ -69,7 +69,3 @@ function insertionSortSwap(arr) {
   }
   return arr;
 }
-
-console.log(insertionSortShift(arrRandom).toString());
-// console.log(insertionSortShift(arrOrdered).toString());
-// console.log(insertionSortShift(arrReversed).toString());
