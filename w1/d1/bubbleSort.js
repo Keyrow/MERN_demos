@@ -3,7 +3,7 @@
   https://visualgo.net/en/sorting
 
   Time Complexity
-    - Best: O(n) when array is already sorted
+    - Best: O(n) linear when array is already sorted
     - Average: O(n^2) quadratic
     - Worst: O(n^2) quadratic when the array is reverse sorted
 
