@@ -21,6 +21,6 @@
 */
 
 const mergeArrX = [3, 5, 7];
-const mergeArrY = [1, 2, 9];
+const mergeArrY = [1, 2, 9, 10, 15];
 
 const arrRandom = [9, 2, 5, 6, 4, 3, 7, 10, 1, 8];
