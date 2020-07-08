@@ -20,5 +20,7 @@
       - an array of 1 item is by definition sorted, so two arrays of 1 item can therefore be merged into a sorted array
 */
 
-const arrX = [3, 5, 7];
-const arrY = [1, 2, 9];
+const mergeArrX = [3, 5, 7];
+const mergeArrY = [1, 2, 9];
+
+const arrRandom = [9, 2, 5, 6, 4, 3, 7, 10, 1, 8];
