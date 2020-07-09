@@ -1,8 +1,11 @@
 import React from "react";
 
+import SingleQuote from "./SingleQuote";
+
 // File name and component name MUST be capitalized
 class Counter extends React.Component {
   constructor(props) {
+    console.log(props);
     // call the parent React.Component constructor and pass it the Counter's props
     super(props);
 
@@ -20,6 +23,11 @@ class Counter extends React.Component {
      * when it is executed from a different context with a different value for `this`
      */
     // this.handleClick = this.handleClick.bind(this);
+  }
+
+  // life cycle method that react automatically calls when finished updating component
+  componentDidUpdate(prevProps) {
+    console.log(`the component updated`, prevProps);
   }
 
   // method added to class
@@ -49,6 +57,10 @@ class Counter extends React.Component {
             return <li key={idx}>{date.toString()}</li>;
           })}
         </ul>
+
+        <SingleQuote>
+          Single quote component inside counter component
+        </SingleQuote>
       </div>
     );
   }
