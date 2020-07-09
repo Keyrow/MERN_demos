@@ -6,7 +6,7 @@
   Steps:
 
   1. Pick an number out of the arr to be your pivot value
-    - usually the middle number or the last number
+    - usually from the middle idx, last idx, or a random idx
 
   2. Partition the array IN PLACE such that all values less than the pivot value are to the left of it
   and all values greater than the pivot value are to the right (not perfectly sorted)
