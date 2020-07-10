@@ -43,27 +43,3 @@ function partitionHoare(nums = [], left = 0, right = nums.length - 1) {
   }
   return left;
 }
-
-/*
-  Lomuto partition scheme on average requires more iterations than Hoare's partitioning scheme
-  Causes quicksort to degrade to O(n^2) when array is already sorted or has all equal elements
-  Time: O(n) linear
-  Space: O(1) constant
-*/
-function partitionLomuto(nums, low = 0, high = nums.length - 1) {
-  const pivot = nums[high];
-  let i = low;
-
-  for (let j = low; j < high; j++) {
-    if (nums[j] <= pivot) {
-      // swap nums at i and j
-      [nums[i], nums[j]] = [nums[j], nums[i]];
-      console.log(nums.toString());
-      i++;
-    }
-  }
-  // final swap
-  [nums[i], nums[high]] = [nums[high], nums[i]];
-  console.log(nums.toString());
-  return i;
-}
