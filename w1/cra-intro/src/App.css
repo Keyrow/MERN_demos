@@ -5,3 +5,7 @@
 .red {
   color: red;
 }
+
+.selected {
+  background-color: cornflowerblue;
+}

@@ -31,10 +31,24 @@ function App() {
 
       <Quotes
         quotes={[
-          "I don't lost any sleep at night over the potential for failure. I cannot even spell the word.",
-          "You miss 100% of the shots you don't take",
-          "Born too soon to explore the galaxy, born too late to explore the Earth, born just in time to browse dank memes.",
-          "Any pizza is a personal pizza if you believe in yourself.",
+          {
+            author: "who cares",
+            text:
+              "I don't lost any sleep at night over the potential for failure. I cannot even spell the word.",
+          },
+          {
+            author: "who cares",
+            text: "You miss 100% of the shots you don't take",
+          },
+          {
+            author: "who cares",
+            text:
+              "Born too soon to explore the galaxy, born too late to explore the Earth, born just in time to browse dank memes.",
+          },
+          {
+            author: "who cares",
+            text: "Any pizza is a personal pizza if you believe in yourself.",
+          },
         ]}
       />
     </div>
