@@ -49,17 +49,20 @@ const Quotes = (props) => {
     setQuoteText("");
   };
 
-  const toggleSelectQuote = (idx) => {
-    // copy the quote using spread so that we don't mutate (update) state directly
-    const updatedQuote = { ...quotes[idx] };
-    updatedQuote.isSelected = !updatedQuote.isSelected;
+  const toggleSelectQuote = (selectedIdx) => {
+    // need to create a new array because if you pass in the same array
+    // to setQuotes, it won't update even if you change something in the array
 
-    // copy the quotes with spread so we don't mutate (update) state directly
-    const quotesCopy = [...quotes];
-    quotesCopy[idx] = updatedQuote;
+    const updatedQuotes = quotes.map((quote, i) => {
+      // copy the quote so we don't mutate the state directly
+      const quoteCopy = { ...quote };
+      if (i === selectedIdx) {
+        quoteCopy.isSelected = !quoteCopy.isSelected;
+      }
+      return quoteCopy;
+    });
 
-    console.log(quotesCopy);
-    setQuotes(quotesCopy);
+    setQuotes(updatedQuotes);
   };
 
   // could be used instead of .map but only for this 1 use case
@@ -125,10 +128,11 @@ const Quotes = (props) => {
       {/* {manuallyMapToSingleQuotes()} */}
 
       {quotes.map((quoteObj, idx) => {
-        let classes = "";
+        let classes = "quote";
 
         if (quoteObj.isSelected) {
-          classes += "selected ";
+          // className needs to be a space separated string
+          classes += " selected";
         }
 
         return (
