@@ -1,24 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+
+import Product from "./components/Product";
 
 function App() {
+  const [name, setName] = useState("");
+
+  let errorMessage = "";
+
+  if (name.length <= 2) {
+    errorMessage = "bad";
+  } else {
+    errorMessage = "good";
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Product />
+
+      <form>
+        <p>{errorMessage}</p>
+        <label style={{ color: name.length <= 2 ? "red" : "green" }}>
+          Name:{" "}
+        </label>
+        <input
+          onChange={(event) => {
+            setName(event.target.value);
+          }}
+          type="text"
+        />
+      </form>
     </div>
   );
 }
