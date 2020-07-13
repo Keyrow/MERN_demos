@@ -17,12 +17,12 @@ function intersectSortedArraysDedupe(arr1, arr2) {
 
   const len1 = arr1.length,
     len2 = arr2.length,
-    result = [];
+    orderedIntersection = [];
 
   while (idx1 < len1 && idx2 < len2) {
     if (arr1[idx1] === arr2[idx2]) {
-      if (result[result.length - 1] !== arr1[idx1]) {
-        result.push(arr1[idx1]);
+      if (orderedIntersection[orderedIntersection.length - 1] !== arr1[idx1]) {
+        orderedIntersection.push(arr1[idx1]);
       }
       idx1++;
       idx2++;
@@ -32,5 +32,5 @@ function intersectSortedArraysDedupe(arr1, arr2) {
       idx2++;
     }
   }
-  return result;
+  return orderedIntersection;
 }
