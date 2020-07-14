@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import "./App.css";
 
-function App() {
+import Task from "./components/Task";
+
+function App2() {
   const [taskTitle, setTaskTitle] = useState("");
   const [tasks, setTasks] = useState([]);
 
@@ -61,6 +63,7 @@ function App() {
 
   return (
     <div className="App">
+      <h1>App2</h1>
       <form
         onSubmit={(event) => {
           handleSubmit(event);
@@ -81,48 +84,18 @@ function App() {
       <hr />
 
       {tasks.map((task, idx) => {
-        const labelStyles = { textDecoration: "none" };
-
-        if (task.isComplete) {
-          labelStyles.textDecoration = "line-through";
-        }
-
         return (
-          <div key={idx}>
-            <label style={labelStyles}>{task.title} </label>
-            {/* using ternary to add the style instead of doing it above the return */}
-            {/* <label
-              style={{
-                textDecoration: task.isComplete ? "line-through" : "none",
-              }}
-            >
-              {task.title}{" "}
-            </label> */}
-            <input
-              onChange={(event) => {
-                toggleCompleted(idx);
-              }}
-              type="checkbox"
-              checked={task.isComplete}
-            />
-            <button
-              onClick={(event) => {
-                handleDelete(idx);
-              }}
-              style={{ marginLeft: 15 }}
-            >
-              Delete
-            </button>
-          </div>
-
-          // a parent is needed for adjacent JSX elements, if you don't want to have too many divs, you can use a React.Fragment
-          // <React.Fragment key={idx}>
-          //   {/* child JSX elements go here */}
-          // </React.Fragment>
+          <Task
+            key={idx}
+            task={task}
+            idx={idx}
+            toggleCompleted={toggleCompleted}
+            handleDelete={handleDelete}
+          ></Task>
         );
       })}
     </div>
   );
 }
 
-export default App;
+export default App2;
