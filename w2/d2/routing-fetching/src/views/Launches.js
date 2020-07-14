@@ -8,6 +8,7 @@ const Launches = (props) => {
   const [launches, setLaunches] = useState(null);
 
   useEffect(() => {
+    // surround fetchLaunches in a setTimeout if it loads too fast to see the loading page
     fetchLaunches();
   }, []);
 
