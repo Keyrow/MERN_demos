@@ -19,7 +19,6 @@ const expected = [1, 2, 2, 2, 6, 6, 7];
 */
 
 const testCases = [{ arguments: [numsA, numsB], expected: expected }];
-
 testDriver([orderedMultisetUnion], testCases);
 
 function orderedMultisetUnion(params) {}

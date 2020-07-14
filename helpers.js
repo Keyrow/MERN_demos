@@ -5,27 +5,32 @@
  * @param {Array} testCases - Array of objects with keys: "args" and "expected" - for each test case's args and expected output
  */
 function testDriver(testFuncs = [], testCases = []) {
-  // allows for 1 function to be passed in directly, or an array of 1 or more functions can be passed in
-  // in case multiple algo solution functions were written and need to be tested
+  // allow 1 or an array of testFuncs and testCases to be passed in, if they aren't an array, put the 1 item passed in
+  // into an array so the below loops will work either way
   let funcs = testFuncs;
+  let cases = testCases;
 
   if (typeof testFuncs === "function") {
     // it's not an array, so put the 1 function into an array so below loop will work
     funcs = [testFuncs];
   }
+
+  if (Array.isArray(testCases) === false) {
+    cases = [testCases];
+  }
+
   for (let i = 0; i < funcs.length; i++) {
     const func = funcs[i];
     console.log("\n" + "*".repeat(60));
     console.log(`Testing ƒunction: ${func.name}\n`);
 
     // execute each test case against each function
-    for (let j = 0; j < testCases.length; j++) {
+    for (let j = 0; j < cases.length; j++) {
       // object destructure syntax for object at j index to put the values for the "arguments" and "expected" keys into vars of the same name
-      let { arguments, expected } = testCases[j];
+      let { arguments, expected } = cases[j];
 
       if (Array.isArray(arguments) === false) {
-        // if only 1 arg was provided and it was not put into an array, put it into an array
-        // so the below ...arguments spread will work
+        // only 1 arg, it needs to be in an array so we can spread the array later
         arguments = [arguments];
       }
 
@@ -43,7 +48,7 @@ function testDriver(testFuncs = [], testCases = []) {
       }
 
       const lastFunc = i === funcs.length - 1;
-      const lastCase = j === testCases.length - 1;
+      const lastCase = j === cases.length - 1;
       const lastCaseAndNotLastFunc = lastCase && !lastFunc;
 
       if (lastCaseAndNotLastFunc === false) {

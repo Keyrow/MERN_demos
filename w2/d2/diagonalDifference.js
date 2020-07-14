@@ -21,7 +21,6 @@ const expected = 2;
 */
 
 const testCases = [{ arguments: [squareMatrix], expected: expected }];
-
 testDriver([diagonalDifference], testCases);
 
 function diagonalDifference(params) {}
