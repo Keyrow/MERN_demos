@@ -2,7 +2,7 @@
  * Send a feelingless autonomous test driver to drive your functions to see if "he" crashes to avoid personal injury.
  * This should be used with nodemon because the console logs are clipped in debugger
  * @param {Array} testFuncs     - Array of functions to test
- * @param {Array} testCases - Array of objects with keys: "args" and "expected" - for each test case's args and expected output
+ * @param {Array} testCases     - Array of objects with keys: "args" and "expected" - for each test case's args and expected output
  */
 function testDriver(testFuncs = [], testCases = []) {
   // allow 1 or an array of testFuncs and testCases to be passed in, if they aren't an array, put the 1 item passed in
