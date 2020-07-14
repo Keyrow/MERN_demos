@@ -1,6 +1,6 @@
 /**
  * Send a feelingless autonomous test driver to drive your functions to see if "he" crashes to avoid personal injury.
- * This should be used with nodemon because the console logs are clipped in debugger
+ * Algos should be ran with node or nodemon because the console logs are clipped in debugger
  * @param {Array} testFuncs     - Array of functions to test
  * @param {Array} testCases     - Array of objects with keys: "args" and "expected" - for each test case's args and expected output
  */
