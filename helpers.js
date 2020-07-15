@@ -1,8 +1,8 @@
 /**
- * Send a feelingless autonomous test driver to drive your functions to see if "he" crashes to avoid personal injury.
+ * Send a feelingless automaton test driver to drive your functions to see if it crashes to avoid personal injury.
  * Algos should be ran with node or nodemon because the console logs are clipped in debugger
- * @param {Array} testFuncs     - Array of functions to test
- * @param {Array} testCases     - Array of objects with keys: "args" and "expected" - for each test case's args and expected output
+ * @param {Array<Function>} testFuncs - Array of functions to test, alsow ill work with a single function instead of array
+ * @param {Array<{ arguments: Array, expected: any }>} testCases - Array of objects with the specified keys: array of "arguments" to pass to the each function and an "expected" output for those arguments, also will work with a single test case instead of array
  */
 function testDriver(testFuncs = [], testCases = []) {
   // allow 1 or an array of testFuncs and testCases to be passed in, if they aren't an array, put the 1 item passed in
@@ -21,7 +21,7 @@ function testDriver(testFuncs = [], testCases = []) {
 
   for (let i = 0; i < funcs.length; i++) {
     const func = funcs[i];
-    console.log("\n" + "*".repeat(60));
+    console.log("\n" + "*".repeat(85));
     console.log(`Testing ƒunction: ${func.name}\n`);
 
     // execute each test case against each function
@@ -53,7 +53,7 @@ function testDriver(testFuncs = [], testCases = []) {
 
       if (lastCaseAndNotLastFunc === false) {
         // for aesthetic reasons, log this unless it's the last case being tested on any function but the last one
-        console.log("-".repeat(60));
+        console.log("-".repeat(85));
       }
     }
   }
