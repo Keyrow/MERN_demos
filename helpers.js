@@ -79,18 +79,22 @@ function testDriver(testFuncs = [], testCases = []) {
         arguments = [arguments];
       }
 
-      const caseNumStr = `Case ${j + 1}.`;
+      const caseNumStr = `🧪 Case ${j + 1}.`;
 
       console.log(
         `${bgBlack + fgBlue + underscore}%s${logStyles.reset}`,
         caseNumStr + "\n"
       );
 
-      console.log(
-        `${fgWhite + bright}%s${logStyles.reset}`,
-        "Given:   ",
-        ...arguments
-      );
+      console.log(`${fgWhite + bright}%s${logStyles.reset}`, "Given:   ");
+
+      arguments.forEach((arg, idx) => {
+        console.log(
+          `${underscore}%s${logStyles.reset}`,
+          `Arg ${idx + 1}:`,
+          arg
+        );
+      });
 
       try {
         // pass the arguments into the func by spreading them apart as comma separated arguments to get the actual returned value
@@ -113,7 +117,7 @@ function testDriver(testFuncs = [], testCases = []) {
         // );
 
         console.log(
-          `${bgBlack + fgGreen}%s${logStyles.reset}`,
+          `\n${bgBlack + fgGreen}%s${logStyles.reset}`,
           `Expected:`,
           expected
         );

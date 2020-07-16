@@ -20,3 +20,24 @@ const testCases = [{ arguments: [nums1], expected: expected1 }];
 testDriver([allNonConsecutive], testCases);
 
 function allNonConsecutive(nums) {}
+
+/* ******************************************************************************** */
+
+// O(n) time
+function allNonConsecutive(nums) {
+  const output = [];
+
+  for (let i = 1; i < nums.length; i++) {
+    const prevNum = nums[i - 1];
+    const currNum = nums[i];
+    const isConsecutive = prevNum + 1 === currNum;
+
+    if (!isConsecutive) {
+      output.push({
+        i: i,
+        n: currNum,
+      });
+    }
+  }
+  return output;
+}
