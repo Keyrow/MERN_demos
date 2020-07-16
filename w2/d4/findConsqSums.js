@@ -1,7 +1,7 @@
 // Interview Algo given to alumni
 
 /* 
-  You are given a list of integers. Find all the consecutive set of 
+  You are given a list of integers. Find all the consecutive sets of 
   integers that adds up to the sum passed in as one of the inputs.
 */
 
@@ -14,7 +14,7 @@ const expected1 = [
   [3, 6, 7],
 ];
 
-// Bonus:
+// Bonus, with 0 potentially as part of the input:
 const nums2 = [2, 5, 3, 6, 7, 0, 0, 23, 12];
 const sum2 = 16;
 const expected2 = [
