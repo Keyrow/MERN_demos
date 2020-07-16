@@ -66,7 +66,7 @@ function testDriver(testFuncs = [], testCases = []) {
     );
     console.log(
       `${bgBlack + fgCyan + underscore}%s${logStyles.reset}`,
-      `Testing ƒunction: ${func.name}\n`
+      `Test Driving ⛟  ƒunction: ${func.name}\n`
     );
 
     // execute each test case against each function
@@ -90,7 +90,7 @@ function testDriver(testFuncs = [], testCases = []) {
 
       arguments.forEach((arg, idx) => {
         console.log(
-          `${underscore}%s${logStyles.reset}`,
+          `${bgBlack + fgCyan + underscore}%s${logStyles.reset}`,
           `Arg ${idx + 1}:`,
           arg
         );
@@ -129,7 +129,7 @@ function testDriver(testFuncs = [], testCases = []) {
       } catch (err) {
         console.log(
           `${bgBlack + fgRed + underscore}%s${logStyles.reset}`,
-          `Error on ${caseNumStr}`
+          `❌ Error on ${caseNumStr}`
         );
         console.log(err);
       }
