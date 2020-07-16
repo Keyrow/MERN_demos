@@ -97,13 +97,13 @@ function testDriver(testFuncs = [], testCases = []) {
       });
 
       try {
-        // pass the arguments into the func by spreading them apart as comma separated arguments to get the actual returned value
         let actual;
 
         // const hrtimeStart = process.hrtime();
         // const iterations = 10000;
 
         // for (let i = 0; i < iterations; i++) {
+        // pass the arguments into the func by spreading them apart as comma separated arguments to get the actual returned value
         actual = func(...arguments);
         // }
 
