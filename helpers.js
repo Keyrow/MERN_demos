@@ -82,49 +82,39 @@ function testDriver(testFuncs = [], testCases = []) {
       const caseNumStr = `🧪 Case ${j + 1}.`;
 
       console.log(
-        `${bgBlack + fgBlue + underscore}%s${logStyles.reset}`,
+        `${bgBlack + fgBlue + bright}%s${logStyles.reset}`,
         caseNumStr + "\n"
       );
 
       console.log(`${fgWhite + bright}%s${logStyles.reset}`, "Given:   ");
 
       arguments.forEach((arg, idx) => {
+        const formattedArg = typeof arg === "string" ? `"${arg}"` : arg;
+
         console.log(
-          `${bgBlack + fgCyan + underscore}%s${logStyles.reset}`,
-          `Arg ${idx + 1}:`,
-          arg
+          `${bgBlack + fgCyan}%s${logStyles.reset}`,
+          `Arg ${idx + 1}:   `,
+          formattedArg
         );
       });
 
       try {
-        let actual;
+        let actual = func(...arguments);
 
-        // const hrtimeStart = process.hrtime();
-        // const iterations = 10000;
-
-        // for (let i = 0; i < iterations; i++) {
-        // pass the arguments into the func by spreading them apart as comma separated arguments to get the actual returned value
-        actual = func(...arguments);
-        // }
-
-        // hrtimeEnd[1] is nanoseconds
-        // const hrtimeEnd = process.hrtime(hrtimeStart);
-        // console.log(
-        //   "Execution ⌚:",
-        //   `${
-        //     hrtimeEnd[1] / 1000000 / iterations
-        //   }ms averaged over ${iterations} iterations.\n`
-        // );
+        const formattedActual =
+          typeof actual === "string" ? `"${actual}"` : actual;
+        const formattedExpected =
+          typeof expected === "string" ? `"${expected}"` : expected;
 
         console.log(
           `\n${bgBlack + fgGreen}%s${logStyles.reset}`,
           `Expected:`,
-          expected
+          formattedExpected
         );
         console.log(
           `${bgBlack + fgMagenta}%s${logStyles.reset}`,
           `Actual:  `,
-          actual
+          formattedActual
         );
       } catch (err) {
         console.log(
