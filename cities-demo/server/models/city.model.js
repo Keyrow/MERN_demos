@@ -22,7 +22,7 @@ const CitySchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// creates the cities collection and enforces the CitySchema on any new documents that are added to the collection
+// creates the cities (auto pluralizes the name) collection and enforces the CitySchema on any new documents that are added to the collection
 const City = mongoose.model("City", CitySchema);
 
 module.exports = City;
