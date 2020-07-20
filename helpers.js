@@ -60,12 +60,14 @@ function testDriver(testFuncs = [], testCases = []) {
 
   for (let i = 0; i < funcs.length; i++) {
     const func = funcs[i];
+    const paramNames = getParamNames(func);
+
     console.log(
       `${bgBlack + fgYellow}%s${logStyles.reset}`,
       "\n" + "*".repeat(85)
     );
     console.log(
-      `${bgBlack + fgCyan + underscore}%s${logStyles.reset}`,
+      `${bgBlack + fgMagenta + underscore}%s${logStyles.reset}`,
       `Test Driving ⛟  ƒunction: ${func.name}\n`
     );
 
@@ -73,11 +75,6 @@ function testDriver(testFuncs = [], testCases = []) {
     for (let j = 0; j < cases.length; j++) {
       // object destructure syntax for object at j index to put the values for the "arguments" and "expected" keys into vars of the same name
       let { arguments, expected } = cases[j];
-
-      if (Array.isArray(arguments) === false) {
-        // only 1 arg, it needs to be in an array so we can spread the array later
-        arguments = [arguments];
-      }
 
       const caseNumStr = `🧪 Case ${j + 1}.`;
 
@@ -88,12 +85,21 @@ function testDriver(testFuncs = [], testCases = []) {
 
       console.log(`${fgWhite + bright}%s${logStyles.reset}`, "Given:   ");
 
+      const argStrPrefixes = arguments.map(
+        (arg, idx) => `Arg ${idx + 1} (${paramNames[idx]}):`
+      );
+      const longestArgStrPrefix = Math.max(
+        ...argStrPrefixes.map((str) => str.length)
+      );
+
       arguments.forEach((arg, idx) => {
         const formattedArg = typeof arg === "string" ? `"${arg}"` : arg;
 
         console.log(
           `${bgBlack + fgCyan}%s${logStyles.reset}`,
-          `Arg ${idx + 1}:   `,
+          `${argStrPrefixes[idx]}${" ".repeat(
+            longestArgStrPrefix - argStrPrefixes[idx].length
+          )}`,
           formattedArg
         );
       });
@@ -134,6 +140,18 @@ function testDriver(testFuncs = [], testCases = []) {
       }
     }
   }
+}
+
+// https://stackoverflow.com/a/9924463/7869597
+var STRIP_COMMENTS = /(\/\/.*$)|(\/\*[\s\S]*?\*\/)|(\s*=[^,\)]*(('(?:\\'|[^'\r\n])*')|("(?:\\"|[^"\r\n])*"))|(\s*=[^,\)]*))/gm;
+var ARGUMENT_NAMES = /([^\s,]+)/g;
+function getParamNames(func) {
+  var fnStr = func.toString().replace(STRIP_COMMENTS, "");
+  var result = fnStr
+    .slice(fnStr.indexOf("(") + 1, fnStr.indexOf(")"))
+    .match(ARGUMENT_NAMES);
+  if (result === null) result = [];
+  return result;
 }
 
 module.exports = {
