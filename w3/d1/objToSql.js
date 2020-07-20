@@ -31,8 +31,43 @@ const testCases = [
 ];
 testDriver([insert, insertFunctional], testCases);
 
-function insert(tableName, columnValuePairs) {}
+function insert(tableName, columnValuePairs) {
+  let columns = "";
+  let values = "";
 
-function insertFunctional(tableName, columnValuePairs) {}
+  for (const colName in columnValuePairs) {
+    if (columnValuePairs.hasOwnProperty(colName)) {
+      let val = columnValuePairs[colName];
+
+      if (typeof val === "string") {
+        val = `'${val}'`;
+      }
+
+      // prepend a comma and space if it's not the first column added to string
+      if (columns === "") {
+        columns += colName;
+      } else {
+        columns += `, ${colName}`;
+      }
+
+      if (values === "") {
+        values += val;
+      } else {
+        values += `, ${val}`;
+      }
+    }
+  }
+  return `INSERT INTO ${tableName} (${columns}) VALUES (${values});`;
+}
+
+function insertFunctional(tableName, columnValuePairs) {
+  const columns = Object.keys(columnValuePairs).join(", ");
+
+  const values = Object.values(columnValuePairs)
+    .map((val) => (typeof val === "string" ? `'${val}'` : val))
+    .join(", ");
+
+  return `INSERT INTO ${tableName} (${columns}) VALUES (${values});`;
+}
 
 /* ******************************************************************************** */
